@@ -4,7 +4,10 @@ import Sidebar from "../components/Sidebar";
 import { useSelector } from "react-redux";
 
 function Appointment() {
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
+  const reduxUser = useSelector((state) => state.auth.user);
+  const storedUser = localStorage.getItem("user");
+  const user = reduxUser || (storedUser && JSON.parse(storedUser));
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [date, setDate] = useState("");
