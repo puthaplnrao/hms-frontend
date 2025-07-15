@@ -4,7 +4,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Sidebar.css"; // custom styles
 
 function Sidebar({ isOpen, toggle }) {
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
+  const reduxUser = useSelector((state) => state.auth.user);
+  const storedUser = localStorage.getItem("user");
+  const user = reduxUser || (storedUser && JSON.parse(storedUser));
+
   const navigate = useNavigate();
 
   const handleLogout = () => {

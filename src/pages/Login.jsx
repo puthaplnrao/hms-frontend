@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../services/authService";
 import { loginSuccess } from "../redux/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,10 @@ function Login() {
       const res = await login({ email, password, role }); // send role to backend
       dispatch(loginSuccess(res.data));
       localStorage.setItem("token", res.data.token);
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${res.data.token}`;
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       navigate("/dashboard");
     } catch (err) {
       const msg =
