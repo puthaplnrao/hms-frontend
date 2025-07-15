@@ -59,3 +59,4 @@ jobs:
               --env-file ~/puthaplnraohms/.env.production.frontend \
               -p 3001:80 \
               ${{ secrets.DOCKER_USERNAME }}/hms.frontend:latest
+            docker image prune -f
